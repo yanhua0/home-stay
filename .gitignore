@@ -9,3 +9,5 @@ out
 gen
 target
 /src/main/resources/generatorConfig.xml
+/src/test/
+/MyLog/

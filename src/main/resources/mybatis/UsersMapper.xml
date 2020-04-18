@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cqupt.home.mapper.UsersMapper">
+  <resultMap id="BaseResultMap" type="org.cqupt.home.model.Users">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="email" jdbcType="TIMESTAMP" property="email" />
+    <result column="phone" jdbcType="TIMESTAMP" property="phone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+</mapper>

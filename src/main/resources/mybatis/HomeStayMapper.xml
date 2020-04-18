@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cqupt.home.mapper.HomeStayMapper">
+  <resultMap id="BaseResultMap" type="org.cqupt.home.model.HomeStay">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="house_name" jdbcType="VARCHAR" property="houseName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="house_owner_id" jdbcType="INTEGER" property="houseOwnerId" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+  </resultMap>
+</mapper>

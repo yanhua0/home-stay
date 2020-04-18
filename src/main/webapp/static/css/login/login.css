@@ -1,0 +1,74 @@
+
+#container{
+	position:relative;
+	top: 190px;
+	left:-38px;
+	width:350px;
+	z-index:999;
+
+}
+.panel{
+	width: 400px;
+
+}
+.panel-body{
+	background: #fff;
+
+}
+#ma{
+	width:400px;
+	position:relative;
+	left:100px;
+}
+.tab{
+	margin-left:36px;
+	margin-top: 8px;
+	width: 302px;
+	height: 42px;
+	border: 2px solid #ddd;
+	line-height: 40px;
+}
+.text{
+	height:36px;
+	width:240px;
+	border:0;
+	outline: 0;
+}
+#open{
+	text-decoration:none;
+	color:#000;
+	cursor:pointer;
+}
+label{
+	font-weight: normal;
+}
+.logi{
+	margin-left:36px;
+	width:300px;
+}
+.reg{
+	margin-top:5px;
+	margin-left: 304px;
+}
+.reg a{
+	font-size:12px;
+	color:#666;
+}
+#tit{
+	width:100%;
+	position: relative;
+	top: 180px;
+	z-index: 5;
+	font-size: 30px;
+	color: white;
+	cursor: pointer;  
+	text-align: center;
+}
+p{
+	width:300px;
+	margin: 0 auto;
+	transition: all 1.2s;  
+}
+p:hover{
+	transform: scale(1.2);
+}

@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!--扫描包下的注解，开启注解扫描-->
-    <context:component-scan base-package="org.cqupt.home.service,org.cqupt.home.config" />
+    <context:component-scan base-package="org.cqupt.home.service,org.cqupt.home.common" />
     <!--spring-aop-jdbc声明式事务-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />

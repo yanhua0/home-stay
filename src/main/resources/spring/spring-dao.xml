@@ -9,7 +9,6 @@
     <!-- 配置需要被Spring管理的Bean（创建，创建后放在了Spring IOC容器里面）-->
     <!--spring整合mybatis-->
     <context:property-placeholder location="classpath:jdbc.properties" system-properties-mode="NEVER"/>
-
     <!--数据库链接池-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <!--配置连接池   -->
@@ -45,7 +44,7 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!-- 扫描DAO层下的接口 -->
         <property name="basePackage" value="org.cqupt.home.mapper"/>
-        <property name="markerInterface" value="tk.mybatis.mapper.common.Mapper"/>
+        <property name="markerInterface" value="org.cqupt.home.common.mapper.Mapper"/>
     </bean>
 
 </beans>

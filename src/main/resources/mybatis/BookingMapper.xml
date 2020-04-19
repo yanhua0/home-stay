@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cqupt.home.mapper.BookingMapper">
+    <resultMap id="BaseResultMap" type="org.cqupt.home.model.Booking">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="room_id" jdbcType="INTEGER" property="roomId"/>
+        <result column="users_id" jdbcType="INTEGER" property="usersId"/>
+        <result column="into_time" jdbcType="TIMESTAMP" property="intoTime"/>
+        <result column="leave_time" jdbcType="TIMESTAMP" property="leaveTime"/>
+    </resultMap>
+    <resultMap id="BookingResDTO" type="org.cqupt.home.dto.response.BookingResDTO">
+
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="room_id" jdbcType="INTEGER" property="roomId"/>
+        <result column="users_id" jdbcType="INTEGER" property="usersId"/>
+        <result column="into_time" jdbcType="TIMESTAMP" property="intoTime"/>
+        <result column="leave_time" jdbcType="TIMESTAMP" property="leaveTime"/>
+        <association property="usersResDTO" javaType="org.cqupt.home.dto.response.UsersResDTO">
+            <result column="user_code" jdbcType="VARCHAR" property="userCode"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+        </association>
+        <association property="roomResDTO" javaType="org.cqupt.home.dto.response.RoomResDTO">
+            <result column="room_name" jdbcType="VARCHAR" property="roomName"/>
+            <result column="price" jdbcType="DOUBLE" property="price"/>
+            <result column="used" jdbcType="INTEGER" property="used"/>
+            <result column="used_str" jdbcType="VARCHAR" property="usedStr"/>
+            <association property="homeStayResDTO" javaType="org.cqupt.home.dto.response.HomeStayResDTO">
+                <result column="house_name" jdbcType="VARCHAR" property="houseName"/>
+                <result column="house_owner_id" jdbcType="INTEGER" property="houseOwnerId"/>
+                <result column="city" jdbcType="VARCHAR" property="city"/>
+                <result column="picture" jdbcType="VARCHAR" property="picture"/>
+            </association>
+        </association>
+    </resultMap>
+    <select id="findByPage" resultMap="BookingResDTO">
+     select  bk.id,bk.room_id,bk.users_id,bk.into_time,bk.leave_time,u.user_code,u.name,r.room_name,r.price,r.used,
+     case when r.used=2
+     then '已入住'
+     else '空闲'
+     end used_str,
+     hs.house_name,hs.house_owner_id,hs.city,hs.picture from booking bk
+     left join users u on bk.users_id=u.id
+     left join room r on bk.room_id=r.id
+     left join home_stay hs on hs.id=r.home_id
+     <where>
+         <if test="used!=null">
+         r.used=#{used}
+         </if>
+         <if test="homeId!=null">
+           and  r.home_id=#{homeId}
+         </if>
+         <if test="roomName!=null and roomName!='' ">
+             and   r.room_name like concat('%',#{roomName},'%')
+         </if>
+         <if test="intoStart!=null">
+             and  bk.into_time>=#{intoStart}
+         </if>
+         <if test="intoEnd!=null">
+             and  bk.into_time <![CDATA[<=]]> #{intoEnd}
+         </if>
+         <if test="leaveStart!=null">
+             and  bk.into_time>=#{leaveStart}
+         </if>
+         <if test="leaveEnd!=null">
+             and  bk.into_time <![CDATA[<=]]> #{leaveEnd}
+         </if>
+     </where>
+
+    </select>
+</mapper>

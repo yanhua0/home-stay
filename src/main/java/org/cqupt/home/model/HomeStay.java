@@ -2,6 +2,7 @@ package org.cqupt.home.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -16,20 +17,22 @@ public class HomeStay {
     private Integer id;
 
     @Column(name = "house_name")
+    @NotEmpty(message = "房屋名称不能为空")
     private String houseName;
 
     @Column(name = "create_time")
     private Date createTime;
-
     private String address;
 
-    private Double price;
+
 
     @Column(name = "house_owner_id")
     private Integer houseOwnerId;
 
-    private String describe;
+    private String description;
 
     private String picture;
+
+    private String city;
 
 }

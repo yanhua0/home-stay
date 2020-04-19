@@ -87,29 +87,21 @@
 			<ul class="nav nav-sidebar">
 				<br>
 				<br><br>
-				<li><a href="/student/findAssess" target="content" class="add">民宿查看<i class="fa fa-chevron-right"></i></a></li>
-				<c:if test="${sessionScope.users.roleId==1}">
+				<li><a href="/api/home/home/stay/page" target="content" class="add">民宿查看<i class="fa fa-chevron-right"></i></a></li>
+				<%--<c:if test="${sessionScope.users.roleId==1}">--%>
 					<li><a href="/api/home/users/info" target="content">房主租户信息管理<i class="fa fa-chevron-right"></i></a></li>
-				</c:if>
-				<li><a href="/teacher/findAllAssess" target="content">预定房间<i class="fa fa-chevron-right"></i></a></li>
+				<%--</c:if>--%>
+				<li><a href="/api/home/room/page" target="content">预定房间<i class="fa fa-chevron-right"></i></a></li>
+
+
 				<li><a href="/student/findGrade" target="content">民宿信息管理<i class="fa fa-chevron-right"></i></a></li>
 				<li><a href="/student/findAssess" target="content">房间信息管理<i class="fa fa-chevron-right"></i></a></li>
 
-				<c:if test="${sessionScope.user.rolename.equals('teacher')}">
-				<li><a href="/teacher/findAllAssess" target="content">测评表现录入<i class="fa fa-chevron-right"></i></a></li>
-				<li><a href="/teacher/findAllGra" target="content">成绩操作<i class="fa fa-chevron-right"></i></a></li>
-				</c:if>
-				<c:if test="${sessionScope.user.rolename.equals('admin')}">
-				<li><a href="/admin/findAllCourse" target="content">课程信息管理<i class="fa fa-chevron-right"></i></a></li>
-				<li><a href="/admin/findAllUser" target="content">用户信息管理<i class="fa fa-chevron-right"></i></a></li>
-				<li><a href="/admin/findAllGra" target="content">学生成绩信息管理<i class="fa fa-chevron-right"></i></a></li>
-				<li><a href="/admin/findAllAssess" target="content">学生测评信息管理<i class="fa fa-chevron-right"></i></a></li>
-				</c:if>
 			</ul>
 		</div>
 	</div>
 	<div id="frame">
-		<iframe src="/api/home/users/info" frameborder="0" name="content"></iframe>
+		<iframe src="/api/home/home/stay/page" frameborder="0" name="content"></iframe>
 	</div>
 	
 

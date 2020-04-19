@@ -82,7 +82,7 @@
     <%--分页实现--%>
     <c:if test="${page.pages>=1}">
         <p>每页${page.pageSize}条  当前页${page.size}条${page.pageNum}/${page.pages}页
-            记录数${page.pages}
+            记录数${page.total}
         </p>
         <div class="test">
             <ul class="pagination">
@@ -120,7 +120,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script>
     $(function () {
-        $("#cate ").val($("#hidden").val())
+        $("#cate ").val($("#hidden").val());
         $("#init").click(function () {
             window.location.href = "info";
         });

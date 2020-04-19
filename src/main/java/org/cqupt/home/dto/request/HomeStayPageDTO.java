@@ -6,5 +6,6 @@ import org.cqupt.home.common.base.PageForm;
 public class HomeStayPageDTO extends PageForm {
     private String address;
     private String houseName;
-    private Integer ownerId;
+    private Integer houseOwnerId;
+    private String city;
 }

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/api/home/home/stay")
@@ -22,18 +23,8 @@ public class HomeStayController {
 
     @PostMapping
     @ResponseBody
-    public void add(@RequestBody HomeStayReqDTO homeStay) {
+    public void add(@Valid HomeStayReqDTO homeStay) {
          homeStayService.save(homeStay);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        homeStayService.deleteById(id);
-    }
-
-    @PutMapping
-    public void update(@RequestBody HomeStayReqDTO homeStay) {
-         homeStayService.update(homeStay);
     }
 
     @GetMapping("/{id}")
@@ -43,6 +34,7 @@ public class HomeStayController {
     @GetMapping("/page")
     public String findByPage(HomeStayPageDTO homeStayPageDTO, Model model){
         model.addAttribute("page",homeStayService.findByPage(homeStayPageDTO));
+        model.addAttribute("house",homeStayPageDTO);
         return "home/homeStay";
     }
 }

@@ -1,24 +1,24 @@
 package org.cqupt.home.common.config;
 
 import org.flywaydb.core.Flyway;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
  * flyway的配置文件
  */
-@Configuration
+@Component
 public class MigrationSqlite {
 
     @Resource
     private DataSource dataSource;
 
 
-    @Bean
-    public Flyway migrate() {
+    @PostConstruct
+    public void migrate() {
         //初始化flyway类
         Flyway flyway = new Flyway();
         //设置加载数据库的相关配置信息
@@ -31,6 +31,6 @@ public class MigrationSqlite {
         flyway.setEncoding("UTF-8");
         flyway.setBaselineOnMigrate(true);
         flyway.migrate();
-        return flyway;
+
  }
 }

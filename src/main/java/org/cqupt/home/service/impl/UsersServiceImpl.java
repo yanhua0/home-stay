@@ -10,8 +10,8 @@ import com.github.pagehelper.PageInfo;
 import org.cqupt.home.common.enums.HsErrorCode;
 import org.cqupt.home.common.exception.HomeStayException;
 import org.cqupt.home.common.util.ConditionUtils;
-import org.cqupt.home.dto.UsersReqDTO;
-import org.cqupt.home.dto.UsersResDTO;
+import org.cqupt.home.dto.request.UsersReqDTO;
+import org.cqupt.home.dto.response.UsersResDTO;
 import org.cqupt.home.mapper.UsersMapper;
 import org.cqupt.home.mapper.UsersRoleMapper;
 import org.cqupt.home.model.Users;
@@ -97,7 +97,7 @@ public class UsersServiceImpl implements UsersService {
         Condition condition=new Condition(Users.class);
         Example.Criteria criteria=condition.createCriteria();
         if(!StringUtils.isEmpty(usersReqDTO.getName())){
-            criteria.andEqualTo("name",usersReqDTO.getName());
+            criteria.andLike("name",usersReqDTO.getName());
         }
         if(Objects.nonNull(usersReqDTO.getRoleId())){
             criteria.andEqualTo("roleId",usersReqDTO.getRoleId());

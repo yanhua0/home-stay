@@ -31,10 +31,10 @@ CREATE TABLE `home_stay` (
                            `house_name` varchar(255) DEFAULT NULL,
                            `create_time` timestamp NULL DEFAULT NULL,
                            `address` varchar(255) DEFAULT NULL,
-                           `price` double(10,2) DEFAULT NULL,
                            `house_owner_id` int(11) DEFAULT NULL,
-                           `describe` varchar(255) DEFAULT NULL,
+                           `description` varchar(255) DEFAULT NULL,
                            `picture` varchar(255) DEFAULT NULL,
+                           `city` varchar(255) DEFAULT NULL,
                            PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
@@ -42,7 +42,8 @@ CREATE TABLE `booking` (
                          `id` int(11) NOT NULL AUTO_INCREMENT,
                          `room_id` int(11) DEFAULT NULL,
                          `users_id` int(11) DEFAULT NULL,
-                         `create_time` timestamp NULL DEFAULT NULL,
+                         `into_time` timestamp NULL DEFAULT NULL,
+                         `leave_time` timestamp NULL DEFAULT NULL,
                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `home_stay`.`users_role`(`id`, `role_name`) VALUES (1, '管理员');

@@ -164,8 +164,10 @@
 							$("#qu").click();
 						},
 						error:function (data) {
-							console.log(data);
-							alert(data.responseJSON.message);
+							console.log(data.responseText);
+							var json=JSON.parse(data.responseText);
+							console.log(json);
+							alert(json.message);
 						}
 					});
 

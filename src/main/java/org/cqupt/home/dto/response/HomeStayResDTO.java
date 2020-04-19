@@ -4,8 +4,12 @@
  */
 package org.cqupt.home.dto.response;
 
-import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+import org.cqupt.home.model.HomeStay;
 
-
-public class HomeStayResDTO implements Serializable {
+@Getter
+@Setter
+public class HomeStayResDTO extends HomeStay {
+     private String userCode;
 }

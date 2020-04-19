@@ -25,5 +25,5 @@
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </root>
-    <logger name="org.cqupt.home.mapper" level="debug"/>
+    <logger name="org.cqupt.home.mapper" level="trace"/>
 </configuration>

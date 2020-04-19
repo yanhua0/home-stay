@@ -1,4 +1,4 @@
-package org.cqupt.home.dto;
+package org.cqupt.home.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;

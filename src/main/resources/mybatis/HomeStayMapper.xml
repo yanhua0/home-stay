@@ -9,9 +9,8 @@
     <result column="house_name" jdbcType="VARCHAR" property="houseName" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="price" jdbcType="DOUBLE" property="price" />
     <result column="house_owner_id" jdbcType="INTEGER" property="houseOwnerId" />
-    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="describe" jdbcType="VARCHAR" property="description" />
     <result column="picture" jdbcType="VARCHAR" property="picture" />
   </resultMap>
 </mapper>

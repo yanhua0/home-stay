@@ -1,7 +1,7 @@
 package org.cqupt.home.controller;
 
 import org.cqupt.home.common.util.BeanCopyUtils;
-import org.cqupt.home.dto.UsersResDTO;
+import org.cqupt.home.dto.response.UsersResDTO;
 import org.cqupt.home.model.Users;
 import org.cqupt.home.service.UsersService;
 import org.springframework.stereotype.Controller;

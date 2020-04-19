@@ -43,5 +43,6 @@ public interface HomeStayService  {
     HomeStay findById(Integer id);
 
     PageInfo<HomeStay> findByPage(HomeStayPageDTO homeStayPageDTO);
+    Integer checkName(HomeStayReqDTO reqDTO);
 
 }

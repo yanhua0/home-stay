@@ -1,4 +1,4 @@
-package org.cqupt.home.dto;
+package org.cqupt.home.dto.response;
 
 import lombok.Data;
 

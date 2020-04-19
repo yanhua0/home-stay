@@ -15,14 +15,18 @@ import org.cqupt.home.common.util.FileUtils;
 import org.cqupt.home.dto.request.HomeStayPageDTO;
 import org.cqupt.home.dto.request.HomeStayReqDTO;
 import org.cqupt.home.mapper.HomeStayMapper;
+import org.cqupt.home.mapper.UsersMapper;
 import org.cqupt.home.model.HomeStay;
+import org.cqupt.home.model.Users;
 import org.cqupt.home.service.HomeStayService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Condition;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,14 +35,19 @@ import java.util.Objects;
 public class HomeStayServiceImpl implements HomeStayService {
     @Resource
     private HomeStayMapper homeStayMapper;
+    @Resource
+    private UsersMapper usersMapper;
 
 
     @Override
     public void save(HomeStayReqDTO reqDTO) {
-        checkName(reqDTO);
+        Integer userId=checkName(reqDTO);
         String picture = FileUtils.saveFile(reqDTO.getFile(), "house");
         reqDTO.setPicture(picture);
-        homeStayMapper.insertSelective(BeanCopyUtils.copyBean(reqDTO, HomeStay.class));
+        reqDTO.setCreateTime(new Date());
+        reqDTO.setHouseOwnerId(userId);
+        HomeStay homeStay=BeanCopyUtils.copyBean(reqDTO, HomeStay.class);
+        homeStayMapper.insertSelective(homeStay);
     }
 
 
@@ -53,13 +62,16 @@ public class HomeStayServiceImpl implements HomeStayService {
 
     @Override
     public void update(HomeStayReqDTO updateDTO) {
-        checkName(updateDTO);
+        Integer userId=checkName(updateDTO);
         HomeStay homeStay = findById(updateDTO.getId());
         if (Objects.nonNull(homeStay)) {
             FileUtils.deleteFile(homeStay.getPicture());
         }
         String picture = FileUtils.saveFile(updateDTO.getFile(), "house");
-        updateDTO.setPicture(picture);
+        if(!StringUtils.isEmpty(picture)){
+            updateDTO.setPicture(picture);
+        }
+        updateDTO.setHouseOwnerId(userId);
         homeStayMapper.updateByPrimaryKeySelective(updateDTO);
     }
 
@@ -72,27 +84,35 @@ public class HomeStayServiceImpl implements HomeStayService {
     public PageInfo<HomeStay> findByPage(HomeStayPageDTO homeStayPageDTO) {
         Condition condition = new Condition(HomeStay.class);
         Example.Criteria criteria = condition.createCriteria();
-        if (!StringUtils.isEmpty(homeStayPageDTO.getAddress())) {
-            criteria.andEqualTo("houseName", homeStayPageDTO.getHouseName());
-        }
         if (!StringUtils.isEmpty(homeStayPageDTO.getHouseName())) {
-            criteria.andEqualTo("address", homeStayPageDTO.getAddress());
+            criteria.andLike("houseName", homeStayPageDTO.getHouseName());
         }
-        if (Objects.nonNull(homeStayPageDTO.getOwnerId())) {
-            criteria.andEqualTo("ownerId", homeStayPageDTO.getOwnerId());
+        if (!StringUtils.isEmpty(homeStayPageDTO.getAddress())) {
+            criteria.andLike("address", homeStayPageDTO.getAddress());
+        }
+        if (Objects.nonNull(homeStayPageDTO.getHouseOwnerId())) {
+            criteria.andEqualTo("houseOwnerId", homeStayPageDTO.getHouseOwnerId());
+        }
+        if (!StringUtils.isEmpty(homeStayPageDTO.getCity())) {
+            criteria.andEqualTo("city", homeStayPageDTO.getCity());
         }
         PageHelper.startPage(homeStayPageDTO.getPage(),homeStayPageDTO.getPageSize());
         List<HomeStay> homeStays=homeStayMapper.selectByCondition(condition);
         return new PageInfo<>(homeStays);
     }
 
-    private void checkName(HomeStay reqDTO) {
+    public Integer checkName(HomeStayReqDTO reqDTO) {
         List<HomeStay> homeStays = homeStayMapper.selectByCondition(ConditionUtils.eq("houseName", reqDTO.getHouseName(), HomeStay.class));
         for (HomeStay homeStay : homeStays) {
             if (!homeStay.getId().equals(reqDTO.getId())) {
                 throw new HomeStayException(HsErrorCode.HOUSE_NAME_REPEAT, reqDTO.getHouseName());
             }
         }
+        List<Users> users=usersMapper.selectByCondition(ConditionUtils.eq("userCode",reqDTO.getUserCode(),Users.class));
+        if(CollectionUtils.isEmpty(users)){
+            throw new HomeStayException(HsErrorCode.USER_CODE_NULL, reqDTO.getUserCode());
+        }
+        return users.get(0).getId();
     }
 
 }

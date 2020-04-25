@@ -16,5 +16,6 @@ import org.cqupt.home.model.Room;
 @Setter
 public class RoomResDTO  extends Room {
     private String usedStr;
+    private UsersResDTO usersResDTO;
     private HomeStayResDTO homeStayResDTO;
 }

@@ -14,6 +14,7 @@ import org.cqupt.home.common.util.ConditionUtils;
 import org.cqupt.home.common.util.FileUtils;
 import org.cqupt.home.dto.request.HomeStayPageDTO;
 import org.cqupt.home.dto.request.HomeStayReqDTO;
+import org.cqupt.home.dto.response.UsersResDTO;
 import org.cqupt.home.mapper.HomeStayMapper;
 import org.cqupt.home.mapper.UsersMapper;
 import org.cqupt.home.model.HomeStay;
@@ -64,12 +65,14 @@ public class HomeStayServiceImpl implements HomeStayService {
     public void update(HomeStayReqDTO updateDTO) {
         Integer userId=checkName(updateDTO);
         HomeStay homeStay = findById(updateDTO.getId());
-        if (Objects.nonNull(homeStay)) {
-            FileUtils.deleteFile(homeStay.getPicture());
-        }
-        String picture = FileUtils.saveFile(updateDTO.getFile(), "house");
-        if(!StringUtils.isEmpty(picture)){
-            updateDTO.setPicture(picture);
+        if(updateDTO.getFile().getSize()!=0){
+            if (Objects.nonNull(homeStay)) {
+                FileUtils.deleteFile(homeStay.getPicture());
+            }
+            String picture = FileUtils.saveFile(updateDTO.getFile(), "house");
+            if(!StringUtils.isEmpty(picture)){
+                updateDTO.setPicture(picture);
+            }
         }
         updateDTO.setHouseOwnerId(userId);
         homeStayMapper.updateByPrimaryKeySelective(updateDTO);
@@ -113,6 +116,14 @@ public class HomeStayServiceImpl implements HomeStayService {
             throw new HomeStayException(HsErrorCode.USER_CODE_NULL, reqDTO.getUserCode());
         }
         return users.get(0).getId();
+    }
+
+    @Override
+    public List<HomeStay> findByUserId(UsersResDTO usersResDTO) {
+        if(usersResDTO.getRoleId()==1){
+            return homeStayMapper.selectAll();
+        }
+        return homeStayMapper.selectByCondition(ConditionUtils.eq("houseOwnerId",usersResDTO.getId(),HomeStay.class));
     }
 
 }

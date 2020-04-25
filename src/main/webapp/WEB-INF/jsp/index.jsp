@@ -65,9 +65,6 @@
 					<li><a href="#" data-toggle="dropdown">欢迎你,${sessionScope.users.name}(${sessionScope.users.roleName})<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 							<c:if test="${sessionScope.user.rolename.equals('student')}">
-							<li role="presentation">
-								<a role="menuitem" tabindex="-1" href="/student/findYx"  target="content" onclick="info(this)">&nbsp;已选课程</a>
-							</li>
 							</c:if>
 							<li role="presentation">
 								<a role="menuitem" tabindex="-1" href="/api/home/reset"  target="content">&nbsp;修改密码</a>
@@ -75,7 +72,7 @@
 
 						</ul>
 					</li>
-					<li><a href="/infor" target="content">返回首页</a></li>
+					<li><a href="/api/home/index" target="_top">返回首页</a></li>
 					<li><a href="/api/home/logout" target="_top">退出系统</a></li>
 				</ul>
 			</div>
@@ -88,15 +85,15 @@
 				<br>
 				<br><br>
 				<li><a href="/api/home/home/stay/page" target="content" class="add">民宿查看<i class="fa fa-chevron-right"></i></a></li>
-				<%--<c:if test="${sessionScope.users.roleId==1}">--%>
+				<c:if test="${sessionScope.users.roleId==1}">
 					<li><a href="/api/home/users/info" target="content">房主租户信息管理<i class="fa fa-chevron-right"></i></a></li>
-				<%--</c:if>--%>
-				<li><a href="/api/home/room/page" target="content">预定房间<i class="fa fa-chevron-right"></i></a></li>
-
-
-				<li><a href="/student/findGrade" target="content">民宿信息管理<i class="fa fa-chevron-right"></i></a></li>
-				<li><a href="/student/findAssess" target="content">房间信息管理<i class="fa fa-chevron-right"></i></a></li>
-
+				</c:if>
+				<c:if test="${sessionScope.users.roleId==2||sessionScope.users.roleId==1}">
+				<li><a href="/api/home/room/page/room" target="content">预订信息管理<i class="fa fa-chevron-right"></i></a></li>
+				</c:if>
+				<c:if test="${sessionScope.users.roleId==2||sessionScope.users.roleId==1}">
+					<li><a href="/api/home/room/room" target="content">房间信息管理<i class="fa fa-chevron-right"></i></a></li>
+				</c:if>
 			</ul>
 		</div>
 	</div>

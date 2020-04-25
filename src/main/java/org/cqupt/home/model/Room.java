@@ -1,9 +1,11 @@
 package org.cqupt.home.model;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.util.Date;
-
+@Data
 public class Room {
     @Id
     private Integer id;
@@ -20,88 +22,9 @@ public class Room {
     private Date createTime;
 
     private Integer used;
-
     /**
-     * @return id
+     * 预订人
      */
-    public Integer getId() {
-        return id;
-    }
+    private Integer orderUsersId;
 
-    /**
-     * @param id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return room_name
-     */
-    public String getRoomName() {
-        return roomName;
-    }
-
-    /**
-     * @param roomName
-     */
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
-    /**
-     * @return price
-     */
-    public Double getPrice() {
-        return price;
-    }
-
-    /**
-     * @param price
-     */
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    /**
-     * @return home_id
-     */
-    public Integer getHomeId() {
-        return homeId;
-    }
-
-    /**
-     * @param homeId
-     */
-    public void setHomeId(Integer homeId) {
-        this.homeId = homeId;
-    }
-
-    /**
-     * @return create_time
-     */
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * @param createTime
-     */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * @return used
-     */
-    public Integer getUsed() {
-        return used;
-    }
-
-    /**
-     * @param used
-     */
-    public void setUsed(Integer used) {
-        this.used = used;
-    }
 }

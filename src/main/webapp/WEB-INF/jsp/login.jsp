@@ -58,21 +58,21 @@
 					<form class="form-group" method="post" action="#" id="form">
 						<div class="form-group">
 							<label for="">用户名</label>
-							<input type="text" class="form-control" name="userCode" placeholder="请输入用户名"
+							<input type="text" class="form-control" name="userCode" required placeholder="请输入用户名"
 								   id="time">
 						</div>
 						<div class="form-group">
 							<label for="">密码</label>
-							<input type="password" class="form-control" name="password" placeholder="请输入密码">
+							<input type="password" class="form-control" name="password"  required placeholder="请输入密码">
 						</div>
 						<div class="form-group">
 							<label for="">姓名</label>
-							<input type="password" class="form-control" name="name" placeholder="请输入姓名">
+							<input type="password" class="form-control" name="name" required placeholder="请输入姓名">
 						</div>
 						<div class="form-group">
 							<label for="">角色</label>
 							<select id="cate" class="form-control" name="roleId">
-								<option value="2">房主</option>
+								<option value="2" >房主</option>
 								<option value="3">租户</option>
 							</select>
 						</div>
@@ -154,7 +154,7 @@
 				console.log(formObject);
 				  $.ajax({
 						type:"POST",
-						url:"/api/home/users",
+						url:"/api/home/users/add",
 						data:JSON.stringify(formObject),
 						dataType:"text",
 						cache:false,

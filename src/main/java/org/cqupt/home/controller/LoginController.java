@@ -25,7 +25,6 @@ public class LoginController {
 
     @RequestMapping("/logout")
     public String loginHtml(HttpSession session) {
-        System.out.println(session.getAttribute("users"));
         session.removeAttribute("users");
         return "login";
     }
@@ -78,6 +77,6 @@ public class LoginController {
         UsersResDTO user = (UsersResDTO) session.getAttribute("users");
         Users u = BeanCopyUtils.copyBean(user, Users.class);
         usersService.updateUser(u, pwd1, pwd2);
-        return "redirect:/api/home/index";
+        return "redirect:/api/home/home/stay/page";
     }
 }

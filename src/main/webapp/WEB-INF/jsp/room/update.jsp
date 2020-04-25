@@ -60,28 +60,28 @@
             <div class="form-group" id="box">
                 <form action="" id="form" method="post">
                     <div class="form-group">
-                        <label>民宿名称<input class="form-control text" type="text" required name="houseName" value="${booking.roomResDTO.homeStayResDTO.houseName}" ></label>
+                        <label>民宿名称<input class="form-control text" type="text" required name="houseName" value="${roomResDTO.homeStayResDTO.houseName}" ></label>
                     </div>
                     <div class="form-group">
-                        <label>房间名称<input class="form-control text"  type="text" required name="roomName" value="${booking.roomResDTO.roomName}"></label>
+                        <label>房间名称<input class="form-control text"  type="text" required name="roomName" value="${roomResDTO.roomName}"></label>
                     </div>
                     <div class="form-group">
-                        <label>价格<input class="form-control text" id="s2" type="text"  required name="price" value="${booking.roomResDTO.price}"></label>
+                        <label>价格<input class="form-control text" id="s2" type="text"  required name="price" value="${roomResDTO.price}"></label>
                     </div>
                     <div class="form-group">
-                        <label><img src="${booking.roomResDTO.homeStayResDTO.picture}"  style="width: 200px;height: 200px"><input required class="form-control text"  type="file" name="file"></label>
+                        <label><img src="${roomResDTO.homeStayResDTO.picture}"  style="width: 200px;height: 200px"><input required class="form-control text"  type="file" name="file"></label>
                     </div>
                     <div class="form-group">
-                        <label>城市<input class="form-control text" required  type="text" name="city" value="${booking.roomResDTO.homeStayResDTO.city}"></label>
+                        <label>城市<input class="form-control text" required  type="text" name="city" value="${roomResDTO.homeStayResDTO.city}"></label>
                     </div>
                     <div class="form-group">
-                        <label>民宿所属人账号<input class="form-control text"  type="text" name="userCode" required value="${booking.roomResDTO.homeStayResDTO.userCode}"></label>
+                        <label>民宿所属人账号<input class="form-control text"  type="text" name="userCode" required value="${roomResDTO.homeStayResDTO.userCode}"></label>
                     </div>
-                    <input type="hidden" name="roomId" value="${booking.roomId}">
+                    <input type="hidden" name="roomId" value="${roomResDTO.id}">
                     <input type="hidden" name="usersId" value="${sessionScope.users.id}">
                     <div class="form-group">
                         <input type="button" class="btn btn-primary" value="提交" id="con">
-                        <a href="/api/home/room/page" class="btn btn-primary">返回</a>
+                        <a href="javascript:history.go(-1)" class="btn btn-primary">返回</a>
                     </div>
                 </form>
             </div>

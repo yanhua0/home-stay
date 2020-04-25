@@ -19,7 +19,7 @@ public interface BookingService  {
      * @param reqDTO
      * @return
      */
-    void save(Booking reqDTO);
+    void save(BookingReqDTO reqDTO);
 
 
     /**

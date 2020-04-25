@@ -60,16 +60,17 @@
             <div class="form-group" id="box">
                 <form action="/api/home/booking" id="form" method="post">
                     <div class="form-group">
-                        <label>入住时间<input class="form-control text" type="text" name="intoTime" ></label>
+                        <label>入住时间<input class="form-control text" type="datetime-local" name="intoTime" ></label>
                     </div>
                     <div class="form-group">
-                        <label>离开时间<input class="form-control text" id="s2" type="text" name="endTime"></label>
+                        <label>离开时间<input class="form-control text" id="s2" type="datetime-local" name="leaveTime"></label>
                     </div>
-                    <input type="hidden" name="roomId" value="${booking.roomId}">
+                    <input type="hidden" name="homeId" value="${room.homeId}">
+                    <input type="hidden" name="roomId" value="${room.id}">
                     <input type="hidden" name="usersId" value="${sessionScope.users.id}">
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="提交" id="con">
-                        <a href="/api/home/room/page" class="btn btn-primary">返回</a>
+                        <a href="javascript:history.go(-1)" class="btn btn-primary">返回</a>
                     </div>
                 </form>
             </div>

@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.cqupt.home.common.enums.HsErrorCode;
 import org.cqupt.home.common.exception.HomeStayException;
+import org.cqupt.home.common.util.BeanCopyUtils;
 import org.cqupt.home.dto.request.BookingReqDTO;
 import org.cqupt.home.dto.request.BookingUpdateReqDTO;
 import org.cqupt.home.dto.request.HomeStayReqDTO;
@@ -27,6 +28,8 @@ import org.cqupt.home.service.RoomService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 
 @Service
@@ -44,12 +47,22 @@ public class BookingServiceImpl implements BookingService {
     private UsersMapper usersMapper;
 
     @Override
-    public void save(Booking reqDTO) {
-        bookingMapper.insertSelective(reqDTO);
-        Room room = new Room();
-        room.setUsed(2);
-        room.setId(reqDTO.getRoomId());
-        roomService.update(room);
+    public void save(BookingReqDTO reqDTO) {
+        try {
+            Booking booking= BeanCopyUtils.copyBean(reqDTO,Booking.class);
+            SimpleDateFormat sip=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            booking.setIntoTime(sip.parse(reqDTO.getIntoTime()));
+            booking.setLeaveTime(sip.parse(reqDTO.getLeaveTime()));
+            bookingMapper.insertSelective(booking);
+            Room room = new Room();
+            room.setId(reqDTO.getRoomId());
+            room.setUsed(2);
+            room.setId(reqDTO.getRoomId());
+            room.setOrderUsersId(reqDTO.getUsersResDTO().getId());
+            roomService.update(room);
+        } catch (ParseException e) {
+            log.error("日期转换错误：",e);
+        }
 
     }
 

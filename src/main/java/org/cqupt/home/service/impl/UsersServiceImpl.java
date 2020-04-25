@@ -121,10 +121,7 @@ public class UsersServiceImpl implements UsersService {
     }
     @Override
     public boolean checkPassword(String password, Users user) {
-        if (user.getPassword().equals(password)) {
-            return true;
-        }
-        return false;
+        return user.getPassword().equals(password);
     }
 
     /**

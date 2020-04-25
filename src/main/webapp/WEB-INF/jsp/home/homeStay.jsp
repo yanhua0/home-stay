@@ -89,9 +89,12 @@
     <div class="panel panel-primary">
         <div class="panel-body">
             <div class="table">
-                <caption class="name">&nbsp;<a href="#"
+                <caption class="name">&nbsp;
+<c:if test="${sessionScope.users.roleId==2||sessionScope.users.roleId==1}">
+                    <a href="#"
                                                class="btn btn-info glyphicon glyphicon-plus" data-toggle="modal"
                                                data-target="#add">添加</a><br><br>
+</c:if>
                     <form action="/api/home/home/stay/page" method="get">&nbsp;<input type="text"
                                                                                       value="${house.houseName}"
                                                                                       class="searc" name="houseName"
@@ -196,28 +199,28 @@
                 <form class="form-group" method="post" action="#" id="form" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="">名称</label>
-                        <input type="text" class="form-control" name="houseName" placeholder="请输入民宿名称"
+                        <input type="text" class="form-control" name="houseName" required placeholder="请输入民宿名称"
                                id="time">
                     </div>
                     <div class="form-group">
                         <label for="">地址</label>
-                        <input type="text" class="form-control" name="address" placeholder="请输入地址">
+                        <input type="text" class="form-control" name="address" required placeholder="请输入地址">
                     </div>
                     <div class="form-group">
                         <label for="">描述</label>
-                        <input type="password" class="form-control" name="description" placeholder="请输入描述">
+                        <input type="text" class="form-control" name="description" required placeholder="请输入描述">
                     </div>
                     <div class="form-group">
                         <label for="">图片</label>
-                        <input type="file" class="form-control" name="file">
+                        <input type="file" class="form-control" name="file" required>
                     </div>
                     <div class="form-group">
                         <label for="">城市</label>
-                        <input type="text" class="form-control" name="city">
+                        <input type="text" class="form-control" name="city" required>
                     </div>
                     <div class="form-group">
                         <label for="">所属人账号</label>
-                        <input type="text" class="form-control" name="userCode" placeholder="请输入账号">
+                        <input type="text" class="form-control" name="userCode" required placeholder="请输入账号">
                     </div>
                 </form>
             </div>
@@ -245,7 +248,7 @@
         });
         $(".table ul li").click(function () {
             var child=$(this).children(".home")[0].value;
-            window.location.href="/api/home/room/page?homeId="+child;
+            window.location.href="/api/home/room/room?homeId="+child+"&key=1";
         });
         $("#con").click(function () {
             var form = new FormData(document.getElementById("form"));

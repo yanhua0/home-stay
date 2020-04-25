@@ -55,19 +55,22 @@
          <if test="roomName!=null and roomName!='' ">
              and   r.room_name like concat('%',#{roomName},'%')
          </if>
-         <if test="intoStart!=null">
+         <if test="intoStart!=null and intoStart!=''">
              and  bk.into_time>=#{intoStart}
          </if>
-         <if test="intoEnd!=null">
+         <if test="intoEnd!=null and intoEnd!=''">
              and  bk.into_time <![CDATA[<=]]> #{intoEnd}
          </if>
-         <if test="leaveStart!=null">
-             and  bk.into_time>=#{leaveStart}
+         <if test="leaveEnd!=null and leaveEnd != ''">
+             and  bk.leave_time>=#{leaveStart}
          </if>
-         <if test="leaveEnd!=null">
-             and  bk.into_time <![CDATA[<=]]> #{leaveEnd}
+         <if test="leaveEnd!=null and leaveEnd != ''">
+             and  bk.leave_time <![CDATA[<=]]> #{leaveEnd}
+         </if>
+         <if test="houseOwnerId!=null">
+             and  house_owner_id=#{houseOwnerId}
          </if>
      </where>
-
+   order by into_time desc
     </select>
 </mapper>

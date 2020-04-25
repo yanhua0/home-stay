@@ -23,6 +23,7 @@ CREATE TABLE `room` (
                       `home_id` int(11) DEFAULT NULL,
                       `create_time` timestamp NULL DEFAULT NULL,
                       `used` int(255) DEFAULT NULL,
+                      `order_users_id` int(11) DEFAULT NULL,
                       PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 

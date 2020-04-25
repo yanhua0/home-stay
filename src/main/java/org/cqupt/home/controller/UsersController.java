@@ -25,7 +25,7 @@ public class UsersController {
     @Resource
     private UsersService usersService;
 
-    @PostMapping
+    @PostMapping("/add")
     @ResponseBody
     public void add(@RequestBody Users users) {
         usersService.save(users);

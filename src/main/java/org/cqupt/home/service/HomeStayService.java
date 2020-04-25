@@ -7,8 +7,10 @@ package org.cqupt.home.service;
 import com.github.pagehelper.PageInfo;
 import org.cqupt.home.dto.request.HomeStayPageDTO;
 import org.cqupt.home.dto.request.HomeStayReqDTO;
+import org.cqupt.home.dto.response.UsersResDTO;
 import org.cqupt.home.model.HomeStay;
 
+import java.util.List;
 
 
 public interface HomeStayService  {
@@ -44,5 +46,7 @@ public interface HomeStayService  {
 
     PageInfo<HomeStay> findByPage(HomeStayPageDTO homeStayPageDTO);
     Integer checkName(HomeStayReqDTO reqDTO);
+
+    List<HomeStay> findByUserId(UsersResDTO usersResDTO);
 
 }

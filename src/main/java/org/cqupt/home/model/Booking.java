@@ -1,7 +1,8 @@
 package org.cqupt.home.model;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
 import java.util.Date;
-import javax.persistence.*;
 
 public class Booking {
     @Id

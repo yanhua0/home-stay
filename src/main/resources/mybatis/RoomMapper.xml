@@ -11,5 +11,55 @@
     <result column="home_id" jdbcType="INTEGER" property="homeId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="used" jdbcType="INTEGER" property="used" />
+    <result column="order_users_id" jdbcType="INTEGER" property="orderUsersId" />
   </resultMap>
+  <resultMap id="RoomResDTO" type="org.cqupt.home.dto.response.RoomResDTO">
+    <result column="id" jdbcType="VARCHAR" property="id"/>
+    <result column="room_name" jdbcType="VARCHAR" property="roomName"/>
+      <result column="price" jdbcType="DOUBLE" property="price"/>
+      <result column="used" jdbcType="INTEGER" property="used"/>
+      <result column="used_str" jdbcType="VARCHAR" property="usedStr"/>
+    <result column="order_users_id" javaType="INTEGER" property="orderUsersId"/>
+      <association property="homeStayResDTO" javaType="org.cqupt.home.dto.response.HomeStayResDTO">
+        <result column="house_name" jdbcType="VARCHAR" property="houseName"/>
+        <result column="user_code" jdbcType="INTEGER" property="userCode"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="picture" jdbcType="VARCHAR" property="picture"/>
+      </association>
+  </resultMap>
+    <select id="findByReqDTO" resultType="org.cqupt.home.model.Room">
+      select *from room r left join home_stay hs on r.home_id=hs.id
+      where r.used=2
+      <if test="userId!=null">
+      and hs.house_owner_id=#{userId}
+      </if>
+    </select>
+  <select id="findByPageDTO" resultMap="RoomResDTO">
+    select r.room_name,r.price,r.used,r.id,r.order_users_id,
+    case when r.used=2
+    then '已入住'
+    else '空闲'
+    end used_str,
+    hs.house_name,hs.house_owner_id,hs.city,hs.picture,u.user_code from room r
+    left join home_stay hs on hs.id=r.home_id
+    left join users u on hs.house_owner_id=u.id
+    <where>
+      <if test="used!=null">
+        r.used=#{used}
+      </if>
+      <if test="homeId!=null">
+        and  r.home_id=#{homeId}
+      </if>
+      <if test="roomId!=null">
+        and  r.id=#{roomId}
+      </if>
+      <if test="roomName!=null and roomName!='' ">
+        and   r.room_name like concat('%',#{roomName},'%')
+      </if>
+      <if test="houseOwnerId!=null">
+        and  house_owner_id=#{houseOwnerId}
+      </if>
+    </where>
+    order by id desc
+  </select>
 </mapper>
